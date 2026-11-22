@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampusFest – College Event Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--deep:#2b1b6b;--violet:#6d4aff;--coral:#ff6b6b;--sun:#ffc857;--mint:#2ec4b6;--bg:#f6f4ff;--ink:#1d1740;--muted:#6a6590}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+header{position:sticky;top:0;z-index:10;background:rgba(43,27,107,.95);backdrop-filter:blur(8px)}
+.bar{max-width:1150px;margin:auto;padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.logo{font-weight:800;font-size:1.4rem;color:#fff}
+.logo span{color:var(--sun)}
+nav{display:flex;gap:1.3rem}
+nav a{color:#e5deff;font-size:.95rem;font-weight:500}
+nav a:hover{color:var(--sun)}
+
+.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(135deg,#2b1b6b 0%,#6d4aff 55%,#ff6b6b 130%);padding:4rem 1.2rem 6rem}
+.blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.35}
+.b1{width:260px;height:260px;background:var(--sun);top:-80px;right:-60px}
+.b2{width:180px;height:180px;background:var(--mint);bottom:-60px;left:8%}
+.b3{width:90px;height:90px;background:var(--coral);top:40%;right:18%}
+.hero-in{position:relative;max-width:1150px;margin:auto}
+.tag{display:inline-block;background:rgba(255,255,255,.18);padding:.3rem .9rem;border-radius:99px;font-size:.85rem;margin-bottom:1rem}
+.hero h1{font-size:clamp(2.4rem,8vw,5rem);font-weight:800;line-height:1.05;max-width:13ch}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.hero p{margin:1.1rem 0 1.8rem;max-width:46ch;color:#ece7ff;font-size:1.05rem}
+.btn{display:inline-block;background:var(--sun);color:var(--ink);font-weight:700;border:0;border-radius:99px;padding:.75rem 1.6rem;cursor:pointer;font:700 1rem Poppins,sans-serif;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:transparent;color:#fff;border:2px solid #fff;margin-left:.5rem}
+.btn.sm{padding:.45rem 1.1rem;font-size:.9rem;background:var(--violet);color:#fff;align-self:flex-start;margin-top:auto}
+
+.stats{max-width:1000px;margin:-3.2rem auto 0;padding:0 1.2rem;position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+.stat{background:#fff;border-radius:18px;padding:1.2rem;text-align:center;box-shadow:0 10px 30px rgba(43,27,107,.15)}
+.stat b{display:block;font-size:2rem;font-weight:800;color:var(--violet)}
+.stat span{color:var(--muted);font-size:.9rem}
+
+main{max-width:1150px;margin:auto;padding:3rem 1.2rem}
+section{margin-bottom:3.5rem}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;margin-bottom:.3rem}
+.sub{color:var(--muted);margin-bottom:1.3rem}
+.tools{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.2rem}
+input,select{font:inherit;padding:.7rem 1rem;border:2px solid #e0dafc;border-radius:12px;background:#fff;color:var(--ink);width:100%}
+input:focus,select:focus{border-color:var(--violet);outline:0}
+.tools input{flex:1 1 230px;width:auto}
+.tools select{flex:0 1 190px;width:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+.card{background:#fff;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 20px rgba(43,27,107,.08);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 32px rgba(43,27,107,.18)}
+.top{height:110px;display:flex;align-items:center;justify-content:space-between;padding:0 1.2rem;color:#fff;font-size:3rem}
+.top small{font-size:.8rem;font-weight:600;background:rgba(255,255,255,.25);padding:.25rem .7rem;border-radius:99px}
+.body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
+.body h3{font-size:1.15rem;font-weight:700}
+.meta{color:var(--muted);font-size:.88rem}
+.body p{font-size:.93rem}
+.Technical .top{background:linear-gradient(135deg,#6d4aff,#4aa8ff)}
+.Cultural .top{background:linear-gradient(135deg,#ff6b6b,#ff9f6b)}
+.Sports .top{background:linear-gradient(135deg,#2ec4b6,#7be495)}
+.Workshop .top{background:linear-gradient(135deg,#f6a700,#ff7a59)}
+.empty{color:var(--muted)}
+
+.cols{display:grid;grid-template-columns:1fr;gap:2rem}
+@media(min-width:850px){.cols{grid-template-columns:1fr 1fr}}
+.panel{background:#fff;border-radius:22px;padding:1.6rem;box-shadow:0 6px 20px rgba(43,27,107,.08)}
+form{display:grid;gap:.9rem}
+label{font-weight:600;font-size:.92rem;display:grid;gap:.3rem}
+.msg{padding:.8rem 1rem;border-radius:12px;background:#d9f7f3;color:#0b5b53;margin-top:.9rem;font-weight:500}
+.err{background:#ffe3e3;color:#9b1c1c}
+.wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:.65rem .5rem;border-bottom:1px solid #eee9ff;font-size:.92rem}
+th{color:var(--muted);font-weight:600}
+.x{background:#ffe3e3;color:#9b1c1c;border:0;border-radius:99px;padding:.3rem .8rem;cursor:pointer;font:600 .8rem Poppins,sans-serif}
+footer{background:var(--deep);color:#d7cfff;text-align:center;padding:2rem 1rem;font-size:.9rem}
+footer b{color:var(--sun)}
+@media(max-width:560px){nav{gap:.9rem}.btn.alt{margin:.6rem 0 0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="logo" href="#top">Campus<span>Fest</span></a>
+  <nav aria-label="Main"><a href="#events">Events</a><a href="#register">Register</a><a href="#mine">My list</a></nav>
+</div></header>
+
+<div class="hero" id="top">
+  <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
+  <div class="hero-in">
+    <span class="tag">SRM TRP Engineering College · Trichy</span>
+    <h1>Discover. Join. <em>Celebrate.</em></h1>
+    <p>All your college events in one place. Browse technical, cultural and sports events, then register in under a minute.</p>
+    <a class="btn" href="#events">Explore events</a><a class="btn alt" href="#register">Register now</a>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><b id="s1">0</b><span>Upcoming events</span></div>
+  <div class="stat"><b>4</b><span>Categories</span></div>
+  <div class="stat"><b id="s2">0</b><span>Your registrations</span></div>
+  <div class="stat"><b id="s3">0</b><span>Days to next event</span></div>
+</div>
+
+<main>
+<section id="events">
+  <h2>Upcoming events</h2>
+  <p class="sub">Pick an event and register in one tap.</p>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Search events or venues" aria-label="Search events">
+    <select id="cat" aria-label="Filter by category">
+      <option value="">All categories</option><option>Technical</option><option>Cultural</option><option>Sports</option><option>Workshop</option>
+    </select>
+  </div>
+  <div class="grid" id="list" aria-live="polite"></div>
+</section>
+
+<div class="cols">
+<section id="register">
+  <div class="panel">
+    <h2>Register</h2>
+    <p class="sub">Fill in your details to reserve a spot.</p>
+    <form id="f" novalidate>
+      <label>Full name<input id="name" required autocomplete="name"></label>
+      <label>College email<input id="email" type="email" required autocomplete="email"></label>
+      <label>Department<input id="dept" required></label>
+      <label>Event<select id="ev" required></select></label>
+      <button class="btn" type="submit">Register</button>
+    </form>
+    <div id="note" role="status"></div>
+  </div>
+</section>
+
+<section id="mine">
+  <div class="panel">
+    <h2>My registrations</h2>
+    <p class="sub">Events you have signed up for.</p>
+    <div class="wrap"><table>
+      <thead><tr><th>Name</th><th>Event</th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </div>
+</section>
+</div>
+</main>
+
+<footer><b>CampusFest</b> · Made by Atchaya Kumaran S, CSE (AI &amp; ML) · Web Essentials mini project</footer>
+
+<script>
+const icons={Technical:"💻",Cultural:"🎭",Sports:"🏏",Workshop:"🛠️"};
+const events=[
+ {id:1,t:"Hack-a-thon 24",c:"Technical",d:"2026-12-05",v:"Computer Lab 2",s:"24-hour team coding challenge. Teams of up to 4."},
+ {id:2,t:"Cultural Night",c:"Cultural",d:"2026-12-10",v:"Main Auditorium",s:"Music, dance and drama performances by students."},
+ {id:3,t:"Inter-Dept Cricket",c:"Sports",d:"2026-12-12",v:"College Ground",s:"Knockout cricket tournament between departments."},
+ {id:4,t:"Web Dev Workshop",c:"Workshop",d:"2026-12-15",v:"Seminar Hall",s:"Hands-on HTML, CSS and JavaScript with GitHub Pages."},
+ {id:5,t:"Quiz Challenge",c:"Technical",d:"2026-12-18",v:"Room 204",s:"General and tech quiz. Individual or pairs."},
+ {id:6,t:"Rangoli Contest",c:"Cultural",d:"2026-12-20",v:"Campus Courtyard",s:"Bring your colours and design a rangoli in 90 minutes."}
+];
+const $=id=>document.getElementById(id);
+let regs=[];
+try{regs=JSON.parse(localStorage.getItem("regs")||"[]")}catch(e){}
+const save=()=>{try{localStorage.setItem("regs",JSON.stringify(regs))}catch(e){}};
+const fmt=d=>new Date(d+"T00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+function esc(s){return s.replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+
+function stats(){
+  $("s1").textContent=events.length;$("s2").textContent=regs.length;
+  const now=new Date();now.setHours(0,0,0,0);
+  const next=events.map(e=>Math.ceil((new Date(e.d+"T00:00")-now)/864e5)).filter(n=>n>=0).sort((a,b)=>a-b)[0];
+  $("s3").textContent=next===undefined?"–":next;
+}
+function render(){
+  const q=$("q").value.toLowerCase(),c=$("cat").value;
+  const r=events.filter(e=>(!c||e.c===c)&&(e.t+e.v).toLowerCase().includes(q));
+  $("list").innerHTML=r.length?r.map(e=>`<article class="card ${e.c}">
+    <div class="top"><span>${icons[e.c]}</span><small>${fmt(e.d)}</small></div>
+    <div class="body"><h3>${e.t}</h3><p class="meta">${e.c} · ${e.v}</p><p>${e.s}</p>
+    <button class="btn sm" data-id="${e.id}">Register</button></div></article>`).join(""):'<p class="empty">No events match your search.</p>';
+}
+function rows(){
+  $("rows").innerHTML=regs.length?regs.map((g,i)=>`<tr><td>${esc(g.n)}</td><td>${esc(g.e)}</td><td><button class="x" data-del="${i}">Cancel</button></td></tr>`).join(""):'<tr><td colspan="3" class="empty">No registrations yet.</td></tr>';
+  stats();
+}
+function note(t,bad){$("note").innerHTML=`<p class="msg${bad?" err":""}">${t}</p>`}
+
+$("ev").innerHTML=events.map(e=>`<option value="${e.id}">${e.t}</option>`).join("");
+$("q").oninput=render;$("cat").onchange=render;
+$("list").onclick=e=>{const b=e.target.closest("[data-id]");if(!b)return;$("ev").value=b.dataset.id;$("register").scrollIntoView();$("name").focus()};
+$("rows").onclick=e=>{const b=e.target.closest("[data-del]");if(!b)return;regs.splice(+b.dataset.del,1);save();rows();note("Registration cancelled.")};
+$("f").onsubmit=e=>{
+  e.preventDefault();
+  const n=$("name").value.trim(),m=$("email").value.trim(),d=$("dept").value.trim(),ev=events.find(x=>x.id==$("ev").value);
+  if(!n||!d||!/^\S+@\S+\.\S+$/.test(m))return note("Enter your name, department and a valid email.",true);
+  if(regs.some(g=>g.m===m&&g.e===ev.t))return note("You are already registered for "+esc(ev.t)+".",true);
+  regs.push({n,m,d,e:ev.t});save();rows();note("You are registered for "+esc(ev.t)+" on "+fmt(ev.d)+".");e.target.reset();
+};
+render();rows();
+</script>
+</body>
+</html>
